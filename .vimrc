@@ -73,6 +73,7 @@ if filereadable($HOME . "/.vimrc.local")
  source ~/.vimrc.local
 endif
 
+set t_Co=256
 set background=dark
 colorscheme Tomorrow-Night
 let g:Powerline_symbols = 'fancy'
