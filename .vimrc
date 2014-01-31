@@ -50,6 +50,7 @@ Bundle 'kchmck/vim-coffee-script'
 " HTML
 Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
 Bundle 'othree/html5.vim'
+Bundle 'tpope/vim-haml'
 
 " Ruby
 Bundle 'vim-ruby/vim-ruby'
@@ -85,7 +86,11 @@ set ruler
 :command NE NERDTree
 
 set encoding=utf-8
-set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
+if has("gui_macvim")
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
+else
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
+end
 let g:airline_powerline_fonts = 1
 
 " set the cursor to a vertical line in insert mode and a solid block
@@ -104,6 +109,10 @@ set tabstop=2                   " an indentation every two columns
 set softtabstop=2               " let backspace delete indent
 set nosmarttab                  " fuck tabs
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+set cursorline
+
+set backspace=2
+set noswapfile
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
