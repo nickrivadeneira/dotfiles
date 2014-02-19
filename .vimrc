@@ -79,7 +79,6 @@ set background=dark
 colorscheme Tomorrow-Night
 let g:Powerline_symbols = 'fancy'
 
-set rnu
 set number
 set ruler
 
