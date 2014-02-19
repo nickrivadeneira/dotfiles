@@ -1,0 +1,16 @@
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff
+  lg = log -p
+[user]
+  name = Nick Rivadeneira
+  email = nicholas.rivadeneira@gmail.com
+[credential]
+  helper = osxkeychain
+[color]
+  ui = true
+[core]
+  editor = vim
