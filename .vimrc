@@ -110,6 +110,7 @@ set nosmarttab                  " fuck tabs
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 set cursorline
 
+set scrolloff=5
 set backspace=2
 set noswapfile
 
