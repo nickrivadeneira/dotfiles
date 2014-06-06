@@ -26,6 +26,7 @@ Bundle 'tomtom/tlib_vim'
 " General
 Bundle 'bling/vim-airline'
 Bundle 'kien/ctrlp.vim'
+let g:ctrlp_use_caching = 0
 Bundle 'matchit.zip'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
@@ -38,6 +39,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'christoomey/vim-tmux-navigator'
 if executable('ctags')
   Bundle 'majutsushi/tagbar'
 endif
@@ -46,6 +48,7 @@ endif
 Bundle 'leshill/vim-json'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'mustache/vim-mustache-handlebars'
 
 " HTML
 Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
@@ -56,6 +59,9 @@ Bundle 'tpope/vim-haml'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
 Bundle 'thoughtbot/vim-rspec'
+let g:rspec_runner = "os_x_iterm"
+Bundle 'jgdavey/tslime.vim'
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 Bundle 'rking/vim-detailed'
 Bundle 'tpope/vim-endwise'
 let g:rubycomplete_buffer_loading = 1
@@ -79,6 +85,9 @@ set background=dark
 colorscheme Tomorrow-Night
 let g:Powerline_symbols = 'fancy'
 
+" Always show status bar
+set laststatus=2
+
 set number
 set ruler
 
@@ -94,10 +103,16 @@ let g:airline_powerline_fonts = 1
 
 " set the cursor to a vertical line in insert mode and a solid block
 " in command mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " Formatting
+set cc=80
 set textwidth=80                " wrap at 80 chars by default
 set nowrap                      " wrap long lines
 set autoindent                  " indent at the same level of the previous line
@@ -119,4 +134,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 map 0 ^
-map \ :NERDTreeToggle<CR>
+map <Leader> :NERDTreeToggle<CR>
+
+let mapleader=" "
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+imap jj <Esc>
