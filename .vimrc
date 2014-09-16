@@ -26,6 +26,10 @@ Bundle 'tomtom/tlib_vim'
 " General
 Bundle 'bling/vim-airline'
 Bundle 'kien/ctrlp.vim'
+if exists("g:ctrl_user_command")
+  unlet g:ctrlp_user_command
+endif
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_use_caching = 0
 Bundle 'matchit.zip'
 Bundle 'scrooloose/nerdtree'
@@ -43,6 +47,9 @@ Bundle 'christoomey/vim-tmux-navigator'
 if executable('ctags')
   Bundle 'majutsushi/tagbar'
 endif
+Bundle 'ntpeters/vim-better-whitespace'
+Bundle 'tpope/vim-commentary'
+Bundle 'rking/ag.vim'
 
 " Javascript
 Bundle 'leshill/vim-json'
@@ -54,6 +61,7 @@ Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
 Bundle 'othree/html5.vim'
 Bundle 'tpope/vim-haml'
+Bundle 'slim-template/vim-slim'
 
 " Ruby
 Bundle 'vim-ruby/vim-ruby'
@@ -61,7 +69,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'thoughtbot/vim-rspec'
 let g:rspec_runner = "os_x_iterm"
 Bundle 'jgdavey/tslime.vim'
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
 Bundle 'rking/vim-detailed'
 Bundle 'tpope/vim-endwise'
 let g:rubycomplete_buffer_loading = 1
@@ -124,6 +132,7 @@ set softtabstop=2               " let backspace delete indent
 set nosmarttab                  " fuck tabs
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 set cursorline
+set mouse=a                     " scroll and select with mouse
 
 set scrolloff=5
 set backspace=2
