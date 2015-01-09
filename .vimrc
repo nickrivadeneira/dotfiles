@@ -14,9 +14,10 @@
 " Instead, add it to one of the files in .vim/init, or create a new one.
 
 set nocompatible
+filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Deps
 Bundle 'gmarik/vundle'
@@ -31,13 +32,13 @@ if exists("g:ctrl_user_command")
 endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_use_caching = 0
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|vendor\/cache'
 Bundle 'matchit.zip'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 
 " General Programming
-Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
@@ -77,7 +78,8 @@ let g:rubycomplete_rails = 1
 
 " Misc
 Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rake'
+
+call vundle#end()
 
 syntax on
 filetype plugin indent on
@@ -144,6 +146,9 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 map 0 ^
 map <Leader> :NERDTreeToggle<CR>
+
+set splitbelow
+set splitright
 
 let mapleader=" "
 map <Leader>t :call RunCurrentSpecFile()<CR>
