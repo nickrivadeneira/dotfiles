@@ -16,70 +16,71 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
 " Deps
-Bundle 'gmarik/vundle'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 
 " General
-Bundle 'bling/vim-airline'
-Bundle 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'kien/ctrlp.vim'
 if exists("g:ctrl_user_command")
   unlet g:ctrlp_user_command
 endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_use_caching = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|vendor\/cache'
-Bundle 'matchit.zip'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
+Plug 'matchit.zip'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 " General Programming
-Bundle 'mattn/gist-vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-fugitive'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'christoomey/vim-tmux-navigator'
+Plug 'mattn/gist-vim'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
+Plug 'flazz/vim-colorschemes'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
 if executable('ctags')
-  Bundle 'majutsushi/tagbar'
+  Plug 'majutsushi/tagbar'
 endif
-Bundle 'ntpeters/vim-better-whitespace'
-Bundle 'tpope/vim-commentary'
-Bundle 'rking/ag.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-commentary'
+Plug 'rking/ag.vim'
+Plug 'wavded/vim-stylus'
 
 " Javascript
-Bundle 'leshill/vim-json'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'mustache/vim-mustache-handlebars'
+Plug 'leshill/vim-json'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'kchmck/vim-coffee-script'
+Plug 'mustache/vim-mustache-handlebars'
 
 " HTML
-Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
-Bundle 'othree/html5.vim'
-Bundle 'tpope/vim-haml'
-Bundle 'slim-template/vim-slim'
+Plug 'ChrisYip/Better-CSS-Syntax-for-Vim'
+Plug 'othree/html5.vim'
+Plug 'tpope/vim-haml'
+Plug 'slim-template/vim-slim'
 
 " Ruby
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rails'
-Bundle 'thoughtbot/vim-rspec'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'thoughtbot/vim-rspec'
 let g:rspec_runner = "os_x_iterm"
-Bundle 'jgdavey/tslime.vim'
+Plug 'jgdavey/tslime.vim'
 let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
-Bundle 'rking/vim-detailed'
-Bundle 'tpope/vim-endwise'
+Plug 'rking/vim-detailed'
+Plug 'tpope/vim-endwise'
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails = 1
 
 " Misc
-Bundle 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
+Plug 'embear/vim-localvimrc'
 
-call vundle#end()
+call plug#end()
 
 syntax on
 filetype plugin indent on
@@ -92,7 +93,7 @@ endif
 
 set t_Co=256
 set background=dark
-colorscheme Tomorrow-Night
+colorscheme tomorrow-night
 let g:Powerline_symbols = 'fancy'
 
 " Always show status bar
@@ -132,7 +133,7 @@ set expandtab                   " tabs are spaces, not tabs
 set tabstop=2                   " an indentation every two columns
 set softtabstop=2               " let backspace delete indent
 set nosmarttab                  " fuck tabs
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+set pastetoggle=<F2>           " pastetoggle (sane indentation on pastes)
 set cursorline
 set mouse=a                     " scroll and select with mouse
 
@@ -156,3 +157,7 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 imap jj <Esc>
+
+autocmd BufRead,BufNewFile js.erb set filetype=eruby.javascript
+autocmd BufRead,BufNewFile css.erb set filetype=eruby.css
+autocmd BufRead,BufNewFile scss.erb set filetype=eruby.scss
