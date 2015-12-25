@@ -103,6 +103,7 @@ set number
 set ruler
 
 :command NE NERDTree
+:command NF NERDTreeFind
 
 set encoding=utf-8
 if has("gui_macvim")
@@ -136,6 +137,10 @@ set nosmarttab                  " fuck tabs
 set pastetoggle=<F2>           " pastetoggle (sane indentation on pastes)
 set cursorline
 set mouse=a                     " scroll and select with mouse
+
+" This unsets the last search pattern register by hitting return
+set hlsearch
+nnoremap <CR> :noh<CR><CR>
 
 set scrolloff=5
 set backspace=2
