@@ -1,18 +1,3 @@
-" ----------
-" Vim Config
-" ----------
-"
-"
-" How this works:
-"
-" This file is minimal.  Most of the vim settings and initialization is in
-" several files in .vim/init.  This makes it easier to find things and to
-" merge between branches and repos.
-"
-" Please do not add configuration to this file, unless it *really* needs to
-" come first or last, like Pathogen and sourcing the machine-local config.
-" Instead, add it to one of the files in .vim/init, or create a new one.
-
 set nocompatible
 filetype off
 
@@ -31,6 +16,9 @@ endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_use_caching = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|vendor\/cache'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 Plug 'matchit.zip'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
@@ -59,7 +47,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 
 " HTML
-Plug 'ChrisYip/Better-CSS-Syntax-for-Vim'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'othree/html5.vim'
 Plug 'tpope/vim-haml'
 Plug 'slim-template/vim-slim'
@@ -102,6 +90,9 @@ set laststatus=2
 set number
 set ruler
 
+" Set regex engine to older version for faster ruby syntax highlighting
+set re=1
+
 :command NE NERDTree
 :command NF NERDTreeFind
 
@@ -134,7 +125,7 @@ set expandtab                   " tabs are spaces, not tabs
 set tabstop=2                   " an indentation every two columns
 set softtabstop=2               " let backspace delete indent
 set nosmarttab                  " fuck tabs
-set pastetoggle=<F2>           " pastetoggle (sane indentation on pastes)
+set pastetoggle=<F2>            " pastetoggle (sane indentation on pastes)
 set cursorline
 set mouse=a                     " scroll and select with mouse
 

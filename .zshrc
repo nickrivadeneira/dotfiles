@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/Users/nick/.rbenv/shims:/Users/nick/.rbenv/bin:/usr/local/bin:/Users/nick/.bin:/Users/nick/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/binn"
+export PATH="$HOME/.rbenv/shims:/$HOME/.rbenv/bin:/usr/local/bin:/$HOME/.bin:/$HOME/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/binn"
 export PATH="$PATH:/usr/local/lib/node_modules/karma/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -71,9 +71,6 @@ export PATH="$PATH:/usr/local/lib/node_modules/karma/bin"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-# added by travis gem
-[ -f /Users/nick/.travis/travis.sh ] && source /Users/nick/.travis/travis.sh
 
 # enable colored output from ls, etc
 export CLICOLOR=1
