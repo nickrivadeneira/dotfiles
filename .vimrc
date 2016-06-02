@@ -26,14 +26,16 @@ Plug 'tpope/vim-unimpaired'
 
 " General Programming
 Plug 'mattn/gist-vim'
-Plug 'scrooloose/syntastic'
+let g:gist_post_private = 1
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+Plug 'mattn/webapi-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'flazz/vim-colorschemes'
 Plug 'airblade/vim-gitgutter'
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 Plug 'christoomey/vim-tmux-navigator'
-if executable('ctags')
-  Plug 'majutsushi/tagbar'
-endif
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'rking/ag.vim'
@@ -41,10 +43,11 @@ Plug 'wavded/vim-stylus'
 
 " Javascript
 Plug 'leshill/vim-json'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'othree/yajs'
+Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'jquery,underscore'
 
 " HTML
 Plug 'hail2u/vim-css3-syntax'
@@ -55,10 +58,11 @@ Plug 'slim-template/vim-slim'
 " Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'thoughtbot/vim-rspec'
+Plug 'nickrivadeneira/vim-spec-runner', { 'branch': 'nr-es6' }
 let g:rspec_runner = "os_x_iterm"
 Plug 'jgdavey/tslime.vim'
-let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
+let g:disable_write_on_spec_run = 1
+let g:spec_runner_dispatcher = 'call Send_to_Tmux("{command}\n")'
 Plug 'rking/vim-detailed'
 Plug 'tpope/vim-endwise'
 let g:rubycomplete_buffer_loading = 1
@@ -116,8 +120,8 @@ endif
 
 " Formatting
 set cc=80
-set textwidth=80                " wrap at 80 chars by default
-set nowrap                      " wrap long lines
+set textwidth=0                 " don't wrap
+set nowrap                      " don't wrap long lines
 set autoindent                  " indent at the same level of the previous line
 set smartindent                 " be smart about it
 set shiftwidth=2                " use indents of 2 spaces
@@ -136,6 +140,7 @@ nnoremap <CR> :noh<CR><CR>
 set scrolloff=5
 set backspace=2
 set noswapfile
+set lazyredraw
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -144,16 +149,21 @@ map <C-l> <C-W>l
 map 0 ^
 map <Leader> :NERDTreeToggle<CR>
 
+" Paste in visual mode without replacing register
+vmap r "_dP
+
 set splitbelow
 set splitright
 
 let mapleader=" "
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+
+map <Leader>t <Plug>RunCurrentSpecFile
+map <Leader>s <Plug>RunFocusedSpec
+map <Leader>l <Plug>RunMostRecentSpec
 imap jj <Esc>
 
 autocmd BufRead,BufNewFile js.erb set filetype=eruby.javascript
 autocmd BufRead,BufNewFile css.erb set filetype=eruby.css
 autocmd BufRead,BufNewFile scss.erb set filetype=eruby.scss
+autocmd BufRead,BufNewFile *es6 set filetype=javascript
+autocmd BufRead,BufNewFile *es6.erb set filetype=eruby.javascript

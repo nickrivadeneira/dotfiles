@@ -5,6 +5,7 @@
   co = checkout
   df = diff
   lg = log -p
+  de = !sh -c 'git branch -d $1 && git push origin --delete $1' -
 [user]
   name = Nick Rivadeneira
   email = nicholas.rivadeneira@gmail.com
@@ -23,3 +24,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[github]
+	user = nickrivadeneira
