@@ -45,13 +45,13 @@ ZSH_THEME="sorin"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git safe-paste colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$HOME/.rbenv/shims:/$HOME/.rbenv/bin:/usr/local/bin:/$HOME/.bin:/$HOME/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/binn"
+export PATH="$HOME/.rbenv/shims:/$HOME/.rbenv/bin:/usr/local/bin:/$HOME/.bin:/$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/binn"
 export PATH="$PATH:/usr/local/lib/node_modules/karma/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -83,7 +83,7 @@ bindkey -v
 bindkey "^F" vi-cmd-mode
 
 # handy keybindings
-bindkey "^A" beginning-of-line
+bindkey "^B" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "^R" history-incremental-search-backward
 bindkey "^P" history-search-backward
@@ -97,3 +97,5 @@ export EDITOR=$VISUAL
 
 # Increase open file limit for a process
 ulimit -n 4096
+
+source $HOME/.bash_aliases
