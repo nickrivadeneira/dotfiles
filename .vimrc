@@ -141,6 +141,7 @@ set scrolloff=5
 set backspace=2
 set noswapfile
 set lazyredraw
+set showcmd
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
