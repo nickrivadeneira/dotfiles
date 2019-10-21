@@ -168,3 +168,4 @@ autocmd BufRead,BufNewFile css.erb set filetype=eruby.css
 autocmd BufRead,BufNewFile scss.erb set filetype=eruby.scss
 autocmd BufRead,BufNewFile *es6 set filetype=javascript
 autocmd BufRead,BufNewFile *es6.erb set filetype=eruby.javascript
+autocmd BufRead,BufNewFile *.git/COMMIT_EDITMSG set filetype=gitcommit
