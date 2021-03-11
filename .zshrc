@@ -45,14 +45,15 @@ ZSH_THEME="sorin"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git safe-paste colored-man-pages)
+plugins=(git safe-paste colored-man-pages bundler web-search jira)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$HOME/.rbenv/shims:/$HOME/.rbenv/bin:/usr/local/bin:/$HOME/.bin:/$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/binn"
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:/$HOME/.bin:/$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/binn"
 export PATH="$PATH:/usr/local/lib/node_modules/karma/bin"
+export PATH="$PATH:/usr/local/go/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -92,10 +93,19 @@ bindkey "^N" insert-last-word
 bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
 # # use vim as the visual editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR=$VISUAL
 
 # Increase open file limit for a process
 ulimit -n 4096
 
-source $HOME/.bash_aliases
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+eval "$(rbenv init -)"
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/nick/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'

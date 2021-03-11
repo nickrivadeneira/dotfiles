@@ -9,17 +9,19 @@ Plug 'tomtom/tlib_vim'
 
 " General
 Plug 'bling/vim-airline'
-Plug 'kien/ctrlp.vim'
-if exists("g:ctrl_user_command")
-  unlet g:ctrlp_user_command
-endif
+set rtp+=/usr/local/opt/fzf
+Plug 'junegunn/fzf.vim'
+" Plug 'kien/ctrlp.vim'
+" if exists("g:ctrl_user_command")
+"   unlet g:ctrlp_user_command
+" endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_use_caching = 0
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|vendor\/cache'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-Plug 'matchit.zip'
+" let g:ctrlp_use_caching = 0
+" let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|vendor\/cache'
+" if executable('ag')
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
+Plug 'adelarsq/vim-matchit'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -30,24 +32,27 @@ let g:gist_post_private = 1
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 Plug 'mattn/webapi-vim'
+Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-Plug 'flazz/vim-colorschemes'
+Plug 'tpope/vim-rhubarb'
+" Plug 'flazz/vim-colorschemes'
+Plug 'dracula/vim'
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
-Plug 'rking/ag.vim'
-Plug 'wavded/vim-stylus'
+" Plug 'rking/ag.vim'
+" Plug 'wavded/vim-stylus'
 
 " Javascript
 Plug 'leshill/vim-json'
-Plug 'kchmck/vim-coffee-script'
+" Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'othree/yajs'
-Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'jquery,underscore'
+" Plug 'othree/yajs'
+" Plug 'othree/javascript-libraries-syntax.vim'
+" let g:used_javascript_libs = 'jquery,underscore'
 
 " HTML
 Plug 'hail2u/vim-css3-syntax'
@@ -58,8 +63,10 @@ Plug 'slim-template/vim-slim'
 " Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'nickrivadeneira/vim-spec-runner', { 'branch': 'nr-es6' }
-let g:rspec_runner = "os_x_iterm"
+" Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-dispatch'
+Plug 'gabebw/vim-spec-runner'
+" let g:rspec_runner = "os_x_iterm"
 Plug 'jgdavey/tslime.vim'
 let g:disable_write_on_spec_run = 1
 let g:spec_runner_dispatcher = 'call Send_to_Tmux("{command}\n")'
@@ -84,8 +91,9 @@ if filereadable($HOME . "/.vimrc.local")
 endif
 
 set t_Co=256
+set termguicolors
 set background=dark
-colorscheme tomorrow-night
+colorscheme dracula
 let g:Powerline_symbols = 'fancy'
 
 " Always show status bar
@@ -149,6 +157,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 map 0 ^
 map <Leader> :NERDTreeToggle<CR>
+map <C-p> :Files<CR>
 
 " Paste in visual mode without replacing register
 vmap r "_dP
@@ -161,7 +170,12 @@ let mapleader=" "
 map <Leader>t <Plug>RunCurrentSpecFile
 map <Leader>s <Plug>RunFocusedSpec
 map <Leader>l <Plug>RunMostRecentSpec
+" map <Leader>t :call RunCurrentSpecFile()<CR>
+" map <Leader>s :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
 imap jj <Esc>
+nmap <Leader>f :exe 'Rg '.expand("<cword>")<cr>
 
 autocmd BufRead,BufNewFile js.erb set filetype=eruby.javascript
 autocmd BufRead,BufNewFile css.erb set filetype=eruby.css
@@ -169,3 +183,4 @@ autocmd BufRead,BufNewFile scss.erb set filetype=eruby.scss
 autocmd BufRead,BufNewFile *es6 set filetype=javascript
 autocmd BufRead,BufNewFile *es6.erb set filetype=eruby.javascript
 autocmd BufRead,BufNewFile *.git/COMMIT_EDITMSG set filetype=gitcommit
+autocmd BufRead,BufNewFile *.json.mustache set filetype=json.mustache

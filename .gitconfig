@@ -6,6 +6,7 @@
   df = diff
   lg = log -p
   de = !sh -c 'git branch -d $1 && git push origin --delete $1' -
+  fr = !git fetch && git rebase origin/master
 [user]
   name = Nick Rivadeneira
   email = nicholas.rivadeneira@gmail.com
@@ -14,7 +15,7 @@
 [color]
   ui = true
 [core]
-  editor = vim
+  editor = nvim
 	excludesfile = /Users/nick/.gitignore_global
 [push]
 	default = simple
@@ -26,3 +27,5 @@
 	trustExitCode = true
 [github]
 	user = nickrivadeneira
+[pager]
+  branch = false
