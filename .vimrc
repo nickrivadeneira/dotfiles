@@ -25,6 +25,7 @@ Plug 'adelarsq/vim-matchit'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'ggandor/leap.nvim'
 
 " General Programming
 Plug 'mattn/gist-vim'
@@ -53,23 +54,27 @@ Plug 'mustache/vim-mustache-handlebars'
 " Plug 'othree/yajs'
 " Plug 'othree/javascript-libraries-syntax.vim'
 " let g:used_javascript_libs = 'jquery,underscore'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 " HTML
 Plug 'hail2u/vim-css3-syntax'
 Plug 'othree/html5.vim'
 Plug 'tpope/vim-haml'
 Plug 'slim-template/vim-slim'
+Plug 'digitaltoad/vim-pug'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 " Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-dispatch'
-Plug 'gabebw/vim-spec-runner'
+Plug 'nickrivadeneira/vim-spec-runner', { 'branch': 'all-specs' }
 " let g:rspec_runner = "os_x_iterm"
 Plug 'jgdavey/tslime.vim'
 let g:disable_write_on_spec_run = 1
 let g:spec_runner_dispatcher = 'call Send_to_Tmux("{command}\n")'
+let g:spec_runner_preloader = 'bundle exec'
 Plug 'rking/vim-detailed'
 Plug 'tpope/vim-endwise'
 let g:rubycomplete_buffer_loading = 1
