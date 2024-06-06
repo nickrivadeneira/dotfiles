@@ -9,34 +9,25 @@ Plug 'tomtom/tlib_vim'
 
 " General
 Plug 'bling/vim-airline'
-set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/opt/fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'kien/ctrlp.vim'
-" if exists("g:ctrl_user_command")
-"   unlet g:ctrlp_user_command
-" endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-" let g:ctrlp_use_caching = 0
-" let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|vendor\/cache'
-" if executable('ag')
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" endif
 Plug 'adelarsq/vim-matchit'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'ggandor/leap.nvim'
+Plug 'ryanoasis/vim-devicons'
 
 " General Programming
 Plug 'mattn/gist-vim'
 let g:gist_post_private = 1
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
-Plug 'mattn/webapi-vim'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-" Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_realtime = 0
@@ -44,30 +35,25 @@ let g:gitgutter_eager = 0
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
-" Plug 'rking/ag.vim'
-" Plug 'wavded/vim-stylus'
+" Plug 'jparise/vim-graphql'
 
 " Javascript
-Plug 'leshill/vim-json'
-" Plug 'kchmck/vim-coffee-script'
-Plug 'mustache/vim-mustache-handlebars'
-" Plug 'othree/yajs'
-" Plug 'othree/javascript-libraries-syntax.vim'
-" let g:used_javascript_libs = 'jquery,underscore'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+" Plug 'leshill/vim-json'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
 
 " HTML
-Plug 'hail2u/vim-css3-syntax'
-Plug 'othree/html5.vim'
-Plug 'tpope/vim-haml'
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'othree/html5.vim'
+" Plug 'tpope/vim-haml'
 Plug 'slim-template/vim-slim'
 Plug 'digitaltoad/vim-pug'
 
 " Ruby
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-" Plug 'thoughtbot/vim-rspec'
+" Plug 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
 Plug 'nickrivadeneira/vim-spec-runner', { 'branch': 'all-specs' }
 " let g:rspec_runner = "os_x_iterm"
@@ -75,14 +61,24 @@ Plug 'jgdavey/tslime.vim'
 let g:disable_write_on_spec_run = 1
 let g:spec_runner_dispatcher = 'call Send_to_Tmux("{command}\n")'
 let g:spec_runner_preloader = 'bundle exec'
-Plug 'rking/vim-detailed'
+" Plug 'rking/vim-detailed'
 Plug 'tpope/vim-endwise'
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_rails = 1
+" let g:rubycomplete_buffer_loading = 1
+" let g:rubycomplete_rails = 1
 
 " Misc
 Plug 'tpope/vim-markdown'
 Plug 'embear/vim-localvimrc'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+
+" LSP
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v3.x'}
 
 call plug#end()
 
@@ -96,7 +92,7 @@ if filereadable($HOME . "/.vimrc.local")
 endif
 
 set t_Co=256
-set termguicolors
+set notermguicolors
 set background=dark
 colorscheme dracula
 let g:Powerline_symbols = 'fancy'
@@ -114,11 +110,6 @@ set re=1
 :command NF NERDTreeFind
 
 set encoding=utf-8
-if has("gui_macvim")
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
-else
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
-end
 let g:airline_powerline_fonts = 1
 
 " set the cursor to a vertical line in insert mode and a solid block
@@ -130,6 +121,22 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+" fzf colors
+let g:fzf_colors = {
+  \ 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Label'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Label'],
+  \ 'info':    ['fg', 'Comment'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Function'],
+  \ 'pointer': ['fg', 'Statement'],
+  \ 'marker':  ['fg', 'Conditional'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Formatting
 set cc=80
@@ -175,10 +182,6 @@ let mapleader=" "
 map <Leader>t <Plug>RunCurrentSpecFile
 map <Leader>s <Plug>RunFocusedSpec
 map <Leader>l <Plug>RunMostRecentSpec
-" map <Leader>t :call RunCurrentSpecFile()<CR>
-" map <Leader>s :call RunNearestSpec()<CR>
-" map <Leader>l :call RunLastSpec()<CR>
-" map <Leader>a :call RunAllSpecs()<CR>
 imap jj <Esc>
 nmap <Leader>f :exe 'Rg '.expand("<cword>")<cr>
 
@@ -189,3 +192,4 @@ autocmd BufRead,BufNewFile *es6 set filetype=javascript
 autocmd BufRead,BufNewFile *es6.erb set filetype=eruby.javascript
 autocmd BufRead,BufNewFile *.git/COMMIT_EDITMSG set filetype=gitcommit
 autocmd BufRead,BufNewFile *.json.mustache set filetype=json.mustache
+autocmd BufRead,BufNewFile tsx set filetype=typescriptreact
